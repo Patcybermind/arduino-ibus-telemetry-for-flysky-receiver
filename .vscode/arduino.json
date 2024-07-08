@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "arduino telemetry.ino",
+    "port": "COM3"
+}
