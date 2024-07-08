@@ -3,34 +3,47 @@
 
 IBusBM IBus; // Use a single IBusBM instance for both servo signal and sensor data
 
-#define TEMPBASE 400 // base value for temperature is -40'C
 
-// sensor values
-uint16_t speed = 0;
-uint16_t temp = TEMPBASE + 200; // start at 20'C
 
 void setup() {
-  // initialize serial port for both debug messages and iBUS communication
   Serial.begin(115200);
 
   // Since Arduino Uno has only one hardware serial port, we use it for both debugging and iBUS.
   // Note: This setup requires careful management of serial communication to avoid conflicts.
   IBus.begin(Serial); // Use the same Serial for IBus communication
 
-  Serial.println("Start iBUS");
+  //Serial.println("Start iBUS");
 
-  // adding 2 sensors to generate some dummy data
+    // adding 2 sensors
   IBus.addSensor(IBUSS_RPM);
   IBus.addSensor(IBUSS_TEMP);
 }
+#define TEMPBASE 400    // base value for 0'C
+
+// sensor values
+uint16_t speed=0;
+uint16_t temp=TEMPBASE+200; // start at 20'C
 
 void loop() {
-  // Since we're using the same serial port for debug and iBUS, avoid using Serial.print for debugging
-  // or ensure that it does not interfere with the iBUS communication.
-
-  IBus.setSensorMeasurement(1, speed);
-  speed += 10; // increase motor speed by 10 RPM
-  IBus.setSensorMeasurement(2, temp++); // increase temperature by 0.1 'C every loop
-
+  IBus.setSensorMeasurement(1,speed);
+  speed += 10;                           // increase motor speed by 10 RPM
+  IBus.setSensorMeasurement(2,temp++); // increase temperature by 0.1 'C every loop
+  //Serial.print("Speed=");
+  //Serial.print(speed);
+  //Serial.print(" Temp=");
+  //Serial.println((temp-TEMPBASE)/10.);
   delay(500);
+}
+
+
+// Function to read servo data from a specific iBUS channel
+int readIBusServoData(int channel) {
+  // iBUS channels are 0-indexed, so subtract 1 from the channel number
+  int channelIndex = channel - 1;
+  
+  // Read the servo data from the specified channel
+  int servoData = IBus.readChannel(channelIndex);
+  
+  // Return the servo data
+  return servoData;
 }
