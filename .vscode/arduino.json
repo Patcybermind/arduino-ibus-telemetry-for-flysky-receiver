@@ -1,5 +1,6 @@
 {
-    "board": "arduino:avr:uno",
+    "board": "rp2040:rp2040:rpipicow",
     "sketch": "arduino telemetry.ino",
-    "port": "COM3"
+    "port": "COM4",
+    "configuration": "flash=2097152_524288,freq=133,opt=Small,rtti=Disabled,stackprotect=Disabled,exceptions=Disabled,dbgport=Disabled,dbglvl=None,usbstack=picosdk,wificountry=worldwide,ipbtstack=ipv4only,uploadmethod=picodebug"
 }
