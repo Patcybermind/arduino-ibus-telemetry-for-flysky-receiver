@@ -1,13 +1,30 @@
-void setup() {
-  pinMode(LED_BUILTIN, OUTPUT); // Initialize the LED pin as an output
+extern "C" {
+#include "pico.h"
+#include "pico/time.h"
+#include "pico/bootrom.h"
 }
 
-void loop() {
-  digitalWrite(LED_BUILTIN, HIGH); // Turn the LED on
-  delay(200); // Wait for a second
-  digitalWrite(LED_BUILTIN, LOW); // Turn the LED off
-  delay(90); // Wait for a second
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(LED_BUILTIN, OUTPUT); // Set the built-in LED pin as an output
+    pinMode(28, INPUT); // Set pin 8 as an input
+
 }
+
+void loop () {
+  
+  if (digitalRead(28) == HIGH) {
+    digitalWrite(LED_BUILTIN, HIGH); // Turn on the LED
+  } else {
+    digitalWrite(LED_BUILTIN, LOW); // Turn off the LED
+    delay(50);
+    digitalWrite(LED_BUILTIN, HIGH); // Turn on the LED
+    delay(50);
+  }
+  
+  //reset_usb_boot(1<<PICO_DEFAULT_LED_PIN,0);
+}
+
 
 /*
 #include <IBusBM.h>
