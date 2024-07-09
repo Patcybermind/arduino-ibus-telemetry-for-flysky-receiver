@@ -1,9 +1,3 @@
-#include <RP2040_ISR_Servo_Debug.h>
-#include <RP2040_ISR_Servo_Impl.h>
-#include <RP2040_ISR_Servo.h>
-
-
-
 extern "C" {
 #include "pico.h"
 #include "pico/time.h"
@@ -62,7 +56,7 @@ void setup() {
   uint16_t temp=TEMPBASE+200; // start at 20'C
   //Since Arduino Uno has only one hardware serial port, we use it for both debugging and iBUS.
   // Note: This setup requires careful management of serial communication to avoid conflicts.
-  IBus.begin(Serial); // Use the same Serial for IBus communication
+  IBus.begin(Serial1, IBUSBM_NOTIMER); // Use the same Serial for IBus communication
 
   //Serial.println("Start iBUS");
 
