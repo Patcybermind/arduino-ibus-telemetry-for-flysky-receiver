@@ -25,7 +25,7 @@ void loop () {
 
 // Before including IBusBM, explicitly specify the namespace for HardwareSerial
 //using HardwareSerial = arduino::HardwareSerial;
-#include <SoftwareSerial.h>
+
 #include <IBusBM.h>
 
 // Define SoftwareSerial RX and TX pins
@@ -54,7 +54,7 @@ void setup() {
   uint16_t temp=TEMPBASE+200; // start at 20'C
   //Since Arduino Uno has only one hardware serial port, we use it for both debugging and iBUS.
   // Note: This setup requires careful management of serial communication to avoid conflicts.
-  IBus.begin(serial1); // Use the same Serial for IBus communication
+  IBus.begin(Serial1); // Use the same Serial for IBus communication
 
   //Serial.println("Start iBUS");
 
