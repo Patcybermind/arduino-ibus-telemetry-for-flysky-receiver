@@ -52,6 +52,8 @@ uint16_t temp=TEMPBASE+200; // start at 20'C
 
 void setup() {
   //serial1.begin(115200);
+  pinMode(LED_BUILTIN, OUTPUT); // Set the built-in LED pin as an output
+  pinMode(28, INPUT); // Set pin 28 as an input
 
   
 
@@ -84,6 +86,7 @@ void loop() {
     digitalWrite(LED_BUILTIN, HIGH); // Turn on the LED
   } else {
     reset_usb_boot(1<<PICO_DEFAULT_LED_PIN,0);
+    //digitalWrite(LED_BUILTIN, LOW); // Turn on the LED
   }
 }
 
